@@ -7,10 +7,6 @@ import datetime
 
 app = Flask(__name__)
 
-# folders
-app.template_folder = "../templates"
-app.static_folder = "../static"
-
 app.secret_key = "smartwastekey"
 
 bcrypt = Bcrypt(app)
