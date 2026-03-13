@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Complaint Submitted</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<meta http-equiv="refresh" content="4;url=/dashboard">
+
+<style>
+
+.success-box{
+margin-top:120px;
+background:rgba(255,255,255,0.12);
+padding:40px;
+border-radius:16px;
+width:420px;
+margin-left:auto;
+margin-right:auto;
+backdrop-filter:blur(10px);
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+.success-icon{
+font-size:60px;
+color:#2ecc71;
+margin-bottom:20px;
+}
+
+.success-text{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.redirect-text{
+font-size:14px;
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="title">Complaint Status</h1>
+
+<div class="success-box">
+
+<div class="success-icon">✔</div>
+
+<div class="success-text">
+Complaint Submitted Successfully
+</div>
+
+<div class="redirect-text">
+Redirecting to dashboard...
+</div>
+
+<br>
+
+<a href="/dashboard">
+<button>Go to Dashboard</button>
+</a>
+
+</div>
+
+</body>
+</html>

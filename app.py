@@ -178,12 +178,13 @@ def get_data():
 
 # ================= COMPLAINT PAGE =================
 
-@app.route('/complaint', methods=["GET","POST"])
+@app.route('/complaint', methods=["GET", "POST"])
 def complaint():
 
     if request.method == "GET":
         return render_template("complaint.html")
 
+    # POST method
     name = request.form.get("name")
     bins = request.form.getlist("bins")
     actions = request.form.getlist("action")
@@ -195,18 +196,17 @@ def complaint():
     action = ", ".join(actions)
 
     complaint = {
-
         "name": name,
         "bin": bin_no,
         "action": action,
         "status": "Pending",
         "time": datetime.datetime.now()
-
     }
 
     complaint_collection.insert_one(complaint)
 
-    return redirect("/")
+    # Instead of redirecting immediately, render a success page
+    return render_template("complaint_success.html", name=name)
 
 
 # ================= ADMIN DASHBOARD =================
