@@ -1,0 +1,6 @@
+Flask
+gunicorn
+pymongo
+flask-cors
+requests
+pyserial

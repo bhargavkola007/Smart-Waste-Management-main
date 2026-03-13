@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Smart Waste Monitoring</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<img src="{{ url_for('static', filename='cutm logo.png') }}" class="logo">
+
+<div class="titles">
+<h1>Centurion University Of Technology and Management</h1>
+</div>
+
+<div class="profile-menu">
+<div class="profile-icon">👤</div>
+<a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+</header>
+
+
+<h1 class="title">Smart Waste Management Dashboard</h1>
+
+
+<div class="bins">
+
+<!-- BIN 1 -->
+<div class="bin-container">
+
+<img src="{{ url_for('static', filename='Bin1.png') }}" class="bin-img">
+
+<div class="bin-screen">
+<div class="screen-data">
+
+<b>BIN 1</b><br>
+
+W: <span id="bin1">0</span>kg <br>
+
+
+</div>
+</div>
+
+</div>
+
+
+<!-- BIN 2 -->
+<div class="bin-container">
+
+<img src="{{ url_for('static', filename='Bin2.png') }}" class="bin-img">
+
+<div class="bin-screen">
+<div class="screen-data">
+
+<b>BIN 2</b><br>
+
+W: <span id="bin2">0</span>kg <br>
+
+
+</div>
+</div>
+
+</div>
+
+
+<!-- BIN 3 -->
+<div class="bin-container">
+
+<img src="{{ url_for('static', filename='Bin3.png') }}" class="bin-img">
+
+<div class="bin-screen">
+<div class="screen-data">
+
+<b>BIN 3</b><br>
+
+W: <span id="bin3">0</span>kg <br>
+
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- REGISTER BUTTON -->
+
+<div style="margin-top:40px">
+
+<a href="/complaint">
+
+<button style="width:250px;font-size:18px">
+
+Register Complaint
+
+</button>
+
+</a>
+
+</div>
+
+
+<footer class="footer">
+<p>© 2025 Centurion University | Smart Waste Monitoring System</p>
+</footer>
+
+
+<script>
+
+setInterval(function(){
+
+fetch("/data")
+
+.then(res => res.json())
+
+.then(data => {
+
+document.getElementById("bin1").innerHTML = data.bin1
+document.getElementById("bin2").innerHTML = data.bin2
+document.getElementById("bin3").innerHTML = data.bin3
+
+document.getElementById("level1").innerHTML = data.level1
+document.getElementById("level2").innerHTML = data.level2
+document.getElementById("level3").innerHTML = data.level3
+
+document.getElementById("type1").innerHTML = data.type1
+document.getElementById("type2").innerHTML = data.type2
+document.getElementById("type3").innerHTML = data.type3
+
+})
+
+},2000)
+
+</script>
+
+</body>
+</html>

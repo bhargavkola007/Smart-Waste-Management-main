@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Register Complaint</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<style>
+
+/* horizontal checkbox group */
+.option-group{
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+.option-group label{
+display:flex;
+align-items:center;
+gap:5px;
+font-size:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="title">Register Complaint</h1>
+
+<div class="complaint-box">
+
+<form action="/complaint" method="POST">
+
+<input type="text" name="name" placeholder="Enter Your Name" required>
+
+<!-- BIN SELECTION -->
+
+<p><b>Select Bin</b></p>
+
+<div class="option-group">
+
+<label>
+<input type="checkbox" name="bins" value="Bin1"> Bin 1
+</label>
+
+<label>
+<input type="checkbox" name="bins" value="Bin2"> Bin 2
+</label>
+
+<label>
+<input type="checkbox" name="bins" value="Bin3"> Bin 3
+</label>
+
+<label>
+<input type="checkbox" name="bins" value="All"> All
+</label>
+
+</div>
+
+<br>
+
+<!-- ACTION SELECTION -->
+
+<p><b>Notification Method</b></p>
+
+<div class="option-group">
+
+<label>
+<input type="checkbox" name="action" value="sms"> SMS
+</label>
+
+<label>
+<input type="checkbox" name="action" value="call"> Call
+</label>
+
+</div>
+
+<br>
+
+<button type="submit">Submit Complaint</button>
+
+</form>
+
+<br>
+
+<a href="/dashboard">
+<button>Back to Dashboard</button>
+</a>
+
+</div>
+
+
+<!-- JAVASCRIPT HERE -->
+
+<script>
+
+const allBox = document.querySelector('input[value="All"]');
+const bins = document.querySelectorAll('input[name="bins"]:not([value="All"])');
+
+allBox.addEventListener("change", function(){
+
+    bins.forEach(function(bin){
+        bin.checked = allBox.checked;
+    });
+
+});
+
+bins.forEach(function(bin){
+
+    bin.addEventListener("change", function(){
+
+        if(!this.checked){
+            allBox.checked = false;
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

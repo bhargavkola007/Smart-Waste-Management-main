@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>Municipality Complaint Dashboard</h1>
+
+<a href="/logout" class="logout-btn">Logout</a>
+
+</div>
+
+
+<div class="dashboard-container">
+
+<div class="stats">
+
+<div class="card">
+<h2>Total Complaints</h2>
+<p>{{ complaints|length }}</p>
+</div>
+
+<div class="card">
+<h2>Pending</h2>
+<p class="pending">
+{{ complaints | selectattr('status','equalto','Pending') | list | length }}
+</p>
+</div>
+
+<div class="card">
+<h2>Completed</h2>
+<p class="completed">
+{{ complaints | selectattr('status','equalto','Completed') | list | length }}
+</p>
+</div>
+
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Bin</th>
+<th>Action</th>
+<th>Status</th>
+<th>Manage</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for c in complaints %}
+
+<tr>
+
+<td>{{c.name}}</td>
+
+<td>Bin {{c.bin}}</td>
+
+<td>{{c.action}}</td>
+
+<td>
+
+{% if c.status == "Pending" %}
+
+<span class="status pending">Pending</span>
+
+{% else %}
+
+<span class="status completed">Completed</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if c.status == "Pending" %}
+
+<a class="complete-btn" href="/complete/{{c._id}}">
+Mark Completed
+</a>
+
+{% else %}
+
+<span class="done">Done</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
