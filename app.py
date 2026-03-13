@@ -133,9 +133,13 @@ def sensor():
 
     sensor_data = {
 
-        "bin1": data.get("bin1", 0),
-        "bin2": data.get("bin2", 0),
-        "bin3": data.get("bin3", 0),
+        "bin1": data.get("bin1",0),
+        "bin2": data.get("bin2",0),
+        "bin3": data.get("bin3",0),
+
+        "level1": data.get("level1",0),
+        "level2": data.get("level2",0),
+        "level3": data.get("level3",0),
 
         "time": datetime.datetime.now()
 
@@ -143,7 +147,7 @@ def sensor():
 
     sensor_collection.insert_one(sensor_data)
 
-    return jsonify({"message": "Weight Data Saved"})
+    return jsonify({"message":"Sensor Data Saved"})
 
 
 # ================= GET SENSOR DATA =================
@@ -155,12 +159,21 @@ def get_data():
 
     if latest:
         return jsonify({
+
             "bin1": latest.get("bin1",0),
             "bin2": latest.get("bin2",0),
-            "bin3": latest.get("bin3",0)
+            "bin3": latest.get("bin3",0),
+
+            "level1": latest.get("level1",0),
+            "level2": latest.get("level2",0),
+            "level3": latest.get("level3",0)
+
         })
 
-    return jsonify({"bin1":0,"bin2":0,"bin3":0})
+    return jsonify({
+        "bin1":0,"bin2":0,"bin3":0,
+        "level1":0,"level2":0,"level3":0
+    })
 
 
 # ================= COMPLAINT PAGE =================

@@ -44,8 +44,8 @@
 
 <b>BIN 1</b><br>
 
-W: <span id="bin1">0</span>kg <br>
-
+W: <span id="bin1">0</span> kg <br>
+L: <span id="level1">0</span> cm
 
 </div>
 </div>
@@ -63,8 +63,8 @@ W: <span id="bin1">0</span>kg <br>
 
 <b>BIN 2</b><br>
 
-W: <span id="bin2">0</span>kg <br>
-
+W: <span id="bin2">0</span> kg <br>
+L: <span id="level2">0</span> cm
 
 </div>
 </div>
@@ -82,8 +82,8 @@ W: <span id="bin2">0</span>kg <br>
 
 <b>BIN 3</b><br>
 
-W: <span id="bin3">0</span>kg <br>
-
+W: <span id="bin3">0</span> kg <br>
+L: <span id="level3">0</span> cm
 
 </div>
 </div>
@@ -126,6 +126,10 @@ fetch("/data")
 document.getElementById("bin1").innerHTML = data.bin1
 document.getElementById("bin2").innerHTML = data.bin2
 document.getElementById("bin3").innerHTML = data.bin3
+
+document.getElementById("level1").innerHTML = data.level1
+document.getElementById("level2").innerHTML = data.level2
+document.getElementById("level3").innerHTML = data.level3
 
 })
 
