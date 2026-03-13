@@ -120,22 +120,12 @@ Register Complaint
 setInterval(function(){
 
 fetch("/data")
-
 .then(res => res.json())
-
 .then(data => {
 
 document.getElementById("bin1").innerHTML = data.bin1
 document.getElementById("bin2").innerHTML = data.bin2
 document.getElementById("bin3").innerHTML = data.bin3
-
-document.getElementById("level1").innerHTML = data.level1
-document.getElementById("level2").innerHTML = data.level2
-document.getElementById("level3").innerHTML = data.level3
-
-document.getElementById("type1").innerHTML = data.type1
-document.getElementById("type2").innerHTML = data.type2
-document.getElementById("type3").innerHTML = data.type3
 
 })
 

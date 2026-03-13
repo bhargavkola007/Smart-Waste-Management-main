@@ -155,16 +155,13 @@ def sensor():
 @app.route('/data')
 def get_data():
 
-    latest = sensor_collection.find().sort("_id", -1).limit(1)
+    latest = sensor_collection.find_one(sort=[("_id",-1)])
 
-    for d in latest:
-
+    if latest:
         return jsonify({
-
-            "bin1": d.get("bin1", 0),
-            "bin2": d.get("bin2", 0),
-            "bin3": d.get("bin3", 0)
-
+            "bin1": latest.get("bin1",0),
+            "bin2": latest.get("bin2",0),
+            "bin3": latest.get("bin3",0)
         })
 
     return jsonify({"bin1":0,"bin2":0,"bin3":0})
@@ -236,4 +233,4 @@ def complete(id):
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
