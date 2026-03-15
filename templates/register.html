@@ -1,39 +1,119 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Register</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Smart Waste Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
 </head>
-
 <body>
 
-<div class="auth-container">
+  <!-- TOP BAR -->
+  <header class="reg-topbar">
+    <div class="reg-brand">
+      <div class="reg-brand-icon">♻</div>
+      <div>
+        <div class="reg-brand-name">Smart Waste Monitor</div>
+        <div class="reg-brand-sub">Centurion University · ECE Dept.</div>
+      </div>
+    </div>
+    <a href="/" class="reg-back">← Home</a>
+  </header>
 
-<h2>Create Account</h2>
+  <!-- MAIN -->
+  <main class="reg-main">
+    <div class="reg-card">
 
-<form method="POST">
+      <!-- CARD TOP -->
+      <div class="reg-card-top">
+        <div class="reg-card-icon">🌱</div>
+        <h2 class="reg-card-title">Create Your Account</h2>
+        <p class="reg-card-sub">Join the campus smart waste monitoring platform</p>
+        <div class="reg-steps">
+          <div class="reg-step active"></div>
+          <div class="reg-step active"></div>
+          <div class="reg-step active"></div>
+        </div>
+      </div>
 
-<input type="text" name="name" placeholder="Full Name" required>
+      <!-- FORM -->
+      <form method="POST" class="reg-form">
 
-<input type="email" name="email" placeholder="Email" required>
+        <div class="reg-form-group">
+          <label class="reg-label">Full Name</label>
+          <div class="reg-input-wrap">
+            <span class="reg-input-icon">👤</span>
+            <input type="text" name="name" placeholder="Enter your full name" required>
+          </div>
+        </div>
 
-<input type="password" name="password" placeholder="Password" required>
+        <div class="reg-form-group">
+          <label class="reg-label">Email Address</label>
+          <div class="reg-input-wrap">
+            <span class="reg-input-icon">✉</span>
+            <input type="email" name="email" placeholder="you@cutm.ac.in" required>
+          </div>
+        </div>
 
-<button type="submit">Register</button>
+        <div class="reg-form-group">
+          <label class="reg-label">Password</label>
+          <div class="reg-input-wrap">
+            <span class="reg-input-icon">🔒</span>
+            <input type="password" name="password" id="pwdInput" placeholder="Create a strong password" required>
+          </div>
+          <div class="pwd-strength">
+            <div class="pwd-bar" id="bar1"></div>
+            <div class="pwd-bar" id="bar2"></div>
+            <div class="pwd-bar" id="bar3"></div>
+            <div class="pwd-bar" id="bar4"></div>
+          </div>
+        </div>
 
-</form>
+        <button type="submit" class="reg-submit">
+          Create Account <span class="reg-arrow">→</span>
+        </button>
 
-<br>
+        <p class="reg-terms">
+          By registering you agree to the
+          <a href="#">Terms of Use</a> of this platform.
+        </p>
 
-<p>Already have account?</p>
+      </form>
 
-<a href="/login">Login Here</a>
+      <div class="reg-divider"><span>Already have an account?</span></div>
+      <a href="/login" class="reg-login-link">Login Here →</a>
 
-</div>
+      <div class="reg-trust">
+        <div class="trust-item">🔒 Secure</div>
+        <div class="trust-item">🏫 CUTM Official</div>
+        <div class="trust-item">♻ ECE Project</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="reg-footer">
+    <span>© 2025 Centurion University</span>
+    <span class="reg-footer-sep">·</span>
+    <span>Smart Waste Monitoring System</span>
+    <span class="reg-footer-sep">·</span>
+    <span>Dept. of ECE</span>
+  </footer>
+
+  <script>
+    // password strength indicator
+    const pwd = document.getElementById('pwdInput');
+    const bars = [1,2,3,4].map(i => document.getElementById('bar' + i));
+    const colors = ['#ef4444','#f59e0b','#3b82f6','#00a878'];
+    pwd.addEventListener('input', () => {
+      const len = pwd.value.length;
+      const strength = len === 0 ? 0 : len < 5 ? 1 : len < 8 ? 2 : len < 12 ? 3 : 4;
+      bars.forEach((bar, i) => {
+        bar.style.background = i < strength ? colors[strength - 1] : 'rgba(0,168,120,0.1)';
+      });
+    });
+  </script>
 
 </body>
 </html>

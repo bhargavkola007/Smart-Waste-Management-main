@@ -1,72 +1,106 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<title>Complaint Submitted</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-<meta http-equiv="refresh" content="4;url=/dashboard">
-
-<style>
-
-.success-box{
-margin-top:120px;
-background:rgba(255,255,255,0.12);
-padding:40px;
-border-radius:16px;
-width:420px;
-margin-left:auto;
-margin-right:auto;
-backdrop-filter:blur(10px);
-box-shadow:0 15px 40px rgba(0,0,0,0.5);
-}
-
-.success-icon{
-font-size:60px;
-color:#2ecc71;
-margin-bottom:20px;
-}
-
-.success-text{
-font-size:20px;
-margin-bottom:10px;
-}
-
-.redirect-text{
-font-size:14px;
-opacity:0.8;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint Submitted — CUTM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='success.css') }}">
+  <meta http-equiv="refresh" content="4;url=/dashboard">
 </head>
-
 <body>
 
-<h1 class="title">Complaint Status</h1>
+  <!-- CONFETTI -->
+  <div class="confetti">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
 
-<div class="success-box">
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-icon">♻</div>
+      <div>
+        <div class="topbar-name">Smart Waste Monitor</div>
+        <div class="topbar-sub">Centurion University · ECE Dept.</div>
+      </div>
+    </div>
+    <div class="topbar-badge">COMPLAINT PORTAL</div>
+  </header>
 
-<div class="success-icon">✔</div>
+  <!-- PAGE TITLE -->
+  <p class="page-title">Submission Status</p>
 
-<div class="success-text">
-Complaint Submitted Successfully
-</div>
+  <!-- SUCCESS CARD -->
+  <div class="success-box">
 
-<div class="redirect-text">
-Redirecting to dashboard...
-</div>
+    <!-- ANIMATED CHECK -->
+    <div class="success-icon-wrap">
+      <div class="check-ring"></div>
+      <div class="check-circle">
+        <span class="check-mark">✓</span>
+      </div>
+    </div>
 
-<br>
+    <div class="success-label">Success</div>
+    <h1 class="success-text">Complaint Submitted<br>Successfully!</h1>
+    <p class="success-sub">
+      Your complaint has been registered and forwarded to the
+      municipality team. You will be notified via your selected method.
+    </p>
 
-<a href="/dashboard">
-<button>Go to Dashboard</button>
-</a>
+    <!-- COUNTDOWN REDIRECT -->
+    <div class="redirect-wrap">
+      <div class="countdown-ring">
+        <svg viewBox="0 0 36 36">
+          <circle class="ring-track" cx="18" cy="18" r="14"/>
+          <circle class="ring-fill"  cx="18" cy="18" r="14"/>
+        </svg>
+        <div class="countdown-num" id="countNum">4</div>
+      </div>
+      <div class="redirect-text">
+        <strong>Redirecting to Dashboard</strong>
+        Taking you back automatically in a moment…
+      </div>
+    </div>
 
-</div>
+    <!-- BUTTONS -->
+    <div class="success-actions">
+      <a href="/dashboard" class="btn-dashboard">
+        Go to Dashboard <span class="btn-arrow">→</span>
+      </a>
+      <a href="/complaint" class="btn-complaint">
+        ＋ Register Another Complaint
+      </a>
+    </div>
+
+    <!-- TRUST PILLS -->
+    <div class="info-pills">
+      <div class="info-pill">🔔 Team Notified</div>
+      <div class="info-pill">📋 Logged</div>
+      <div class="info-pill">🔒 Secure</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2025 Centurion University</span>
+    <span class="footer-sep">·</span>
+    <span>Smart Waste Monitoring System</span>
+    <span class="footer-sep">·</span>
+    <span>Dept. of ECE</span>
+  </footer>
+
+  <script>
+    // Live countdown ticker
+    let count = 4;
+    const num = document.getElementById('countNum');
+    const timer = setInterval(() => {
+      count--;
+      if (count <= 0) { clearInterval(timer); num.textContent = '✓'; }
+      else { num.textContent = count; }
+    }, 1000);
+  </script>
 
 </body>
 </html>

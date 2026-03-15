@@ -177,7 +177,6 @@ def get_data():
 
 
 # ================= COMPLAINT PAGE =================
-
 @app.route('/complaint', methods=["GET", "POST"])
 def complaint():
 
@@ -189,25 +188,38 @@ def complaint():
     bins = request.form.getlist("bins")
     actions = request.form.getlist("action")
 
+    # NEW: get reasons
+    reasons = request.form.getlist("reason")
+    other_reason = request.form.get("other_reason")
+
     if not name or not bins or not actions:
         return "All complaint fields required"
 
     bin_no = ", ".join(bins)
     action = ", ".join(actions)
 
+    # Combine reasons
+    reason_text = ", ".join(reasons)
+
+    # If user typed custom reason
+    if other_reason:
+        if reason_text:
+            reason_text += ", " + other_reason
+        else:
+            reason_text = other_reason
+
     complaint = {
         "name": name,
         "bin": bin_no,
         "action": action,
+        "reason": reason_text,   # NEW FIELD
         "status": "Pending",
         "time": datetime.datetime.now()
     }
 
     complaint_collection.insert_one(complaint)
 
-    # Instead of redirecting immediately, render a success page
     return render_template("complaint_success.html", name=name)
-
 
 # ================= ADMIN DASHBOARD =================
 

@@ -1,37 +1,114 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Login</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Smart Waste Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
-
 <body>
 
-<div class="auth-container">
+  <div class="login-split">
 
-<h2>User Login</h2>
+    <!-- ═══ LEFT PANEL ═══ -->
+    <div class="login-left">
+      <div class="left-content">
 
-<form method="POST">
+        <div class="left-logo">
+          <div class="logo-icon">♻</div>
+          <div class="logo-text">
+            <div class="name">Smart Waste Monitor</div>
+            <div class="sub">Centurion University · ECE Dept.</div>
+          </div>
+        </div>
 
-<input type="email" name="email" placeholder="Email" required>
+        <div class="left-eyebrow">IoT Campus Solution</div>
+        <h1 class="left-heading">
+          Monitor.<br>
+          <span>Alert.</span><br>
+          Manage.
+        </h1>
+        <p class="left-desc">
+          Real-time bin telemetry, intelligent fill-level alerts, and complaint
+          management — all in one platform for Centurion University campus.
+        </p>
 
-<input type="password" name="password" placeholder="Password" required>
+        <div class="left-features">
+          <div class="lf-item">
+            <div class="lf-icon">📡</div>
+            <div class="lf-text">
+              <div class="lf-title">Live Sensor Data</div>
+              <div class="lf-sub">Updates every 2 seconds via IoT</div>
+            </div>
+          </div>
+          <div class="lf-item">
+            <div class="lf-icon">🔔</div>
+            <div class="lf-text">
+              <div class="lf-title">Smart Alerts</div>
+              <div class="lf-sub">SMS & call notifications on overflow</div>
+            </div>
+          </div>
+          <div class="lf-item">
+            <div class="lf-icon">📊</div>
+            <div class="lf-text">
+              <div class="lf-title">Weight & Fill Monitoring</div>
+              <div class="lf-sub">3 smart bins across campus</div>
+            </div>
+          </div>
+        </div>
 
-<button type="submit">Login</button>
+        <div class="left-live">
+          <span class="live-dot"></span> SYSTEM LIVE
+        </div>
 
-</form>
+      </div>
+    </div>
 
-<br>
+    <!-- ═══ RIGHT PANEL ═══ -->
+    <div class="login-right">
+      <div class="login-form-wrap">
 
-<p>Don't have account?</p>
+        <div class="form-top">
+          <span class="form-icon">🔑</span>
+          <h2 class="form-title">Welcome back</h2>
+          <p class="form-subtitle">Sign in to access the waste monitoring portal</p>
+        </div>
 
-<a href="/register">Register Here</a>
+        <form method="POST">
 
-</div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input type="email" name="email" placeholder="you@cutm.ac.in" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Login <span class="submit-arrow">→</span>
+          </button>
+
+        </form>
+
+        <div class="form-divider"><span>Don't have an account?</span></div>
+        <a href="/register" class="register-link-btn">Create Account →</a>
+
+        <div class="form-back">
+          <a href="/" class="back-link">← Back to Home</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>

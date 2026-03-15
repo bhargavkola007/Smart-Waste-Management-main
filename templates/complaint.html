@@ -1,129 +1,196 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<title>Register Complaint</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='complaint.css') }}">
-<style>
-
-/* horizontal checkbox group */
-.option-group{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
-margin-top:10px;
-}
-
-.option-group label{
-display:flex;
-align-items:center;
-gap:5px;
-font-size:15px;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Complaint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='complaint.css') }}">
+  <!-- In your actual project, replace these with: -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='complaint.css') }}"> -->
 </head>
-
 <body>
 
-<h1 class="title">Register Complaint</h1>
+<div class="page-wrapper">
 
-<div class="complaint-box">
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="badge">
+      <span></span> Waste Management Portal
+    </div>
+    <h1 class="title">Register a Complaint</h1>
+    <p class="subtitle">Report bin issues to your local waste authority in seconds.</p>
+  </header>
 
-<form action="/complaint" method="POST">
+  <!-- CARD -->
+  <div class="complaint-card">
 
-<input type="text" name="name" placeholder="Enter Your Name" required>
+    <!-- STEP INDICATORS -->
+    <div class="step-row">
+      <div class="step active">
+        <div class="step-num">1</div>
+        <span>Identity</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step active">
+        <div class="step-num">2</div>
+        <span>Bins</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step active">
+        <div class="step-num">3</div>
+        <span>Issue</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step active">
+        <div class="step-num">4</div>
+        <span>Notify</span>
+      </div>
+    </div>
 
-<!-- BIN SELECTION -->
+    <form action="/complaint" method="POST">
 
-<p><b>Select Bin</b></p>
+      <!-- NAME -->
+      <div class="form-section">
+        <div class="section-label">Your Name</div>
+        <div class="field-wrap">
+          <span class="field-icon">👤</span>
+          <input type="text" name="name" placeholder="Enter your full name" required>
+        </div>
+      </div>
 
-<div class="option-group">
+      <div class="divider"></div>
 
-<label>
-<input type="checkbox" name="bins" value="Bin1"> Bin 1
-</label>
+      <!-- BIN SELECTION -->
+      <div class="form-section">
+        <div class="section-label">Select Bin</div>
+        <div class="chip-grid">
 
-<label>
-<input type="checkbox" name="bins" value="Bin2"> Bin 2
-</label>
+          <div class="chip-item">
+            <input type="checkbox" name="bins" value="Bin1" id="bin1">
+            <label for="bin1"><span class="chip-dot"></span> Bin 1</label>
+          </div>
 
-<label>
-<input type="checkbox" name="bins" value="Bin3"> Bin 3
-</label>
+          <div class="chip-item">
+            <input type="checkbox" name="bins" value="Bin2" id="bin2">
+            <label for="bin2"><span class="chip-dot"></span> Bin 2</label>
+          </div>
 
-<label>
-<input type="checkbox" name="bins" value="All"> All
-</label>
+          <div class="chip-item">
+            <input type="checkbox" name="bins" value="Bin3" id="bin3">
+            <label for="bin3"><span class="chip-dot"></span> Bin 3</label>
+          </div>
+
+          <div class="chip-item chip-all">
+            <input type="checkbox" name="bins" value="All" id="binAll">
+            <label for="binAll"><span class="chip-dot"></span> All Bins</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- NOTIFICATION METHOD -->
+      <div class="form-section">
+        <div class="section-label">Notification Method</div>
+        <div class="chip-grid">
+
+          <div class="chip-item">
+            <input type="checkbox" name="action" value="sms" id="notifySms">
+            <label for="notifySms"><span class="chip-dot"></span> 📱 SMS</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="action" value="call" id="notifyCall">
+            <label for="notifyCall"><span class="chip-dot"></span> 📞 Call</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- REASON -->
+      <div class="form-section">
+        <div class="section-label">Reason for Complaint</div>
+        <div class="chip-grid">
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="bin_full" id="rFull">
+            <label for="rFull"><span class="chip-dot"></span> 🗑️ Bin Full</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="bad_smell" id="rSmell">
+            <label for="rSmell"><span class="chip-dot"></span> 🤢 Bad Smell</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="not_cleaned" id="rClean">
+            <label for="rClean"><span class="chip-dot"></span> 🧹 Not Cleaned</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="damaged_bin" id="rDamage">
+            <label for="rDamage"><span class="chip-dot"></span> 🔧 Damaged Bin</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="overflowing" id="rOverflow">
+            <label for="rOverflow"><span class="chip-dot"></span> ♻️ Overflowing</label>
+          </div>
+
+          <div class="chip-item">
+            <input type="checkbox" name="reason" value="other" id="rOther">
+            <label for="rOther"><span class="chip-dot"></span> ✏️ Other</label>
+          </div>
+
+        </div>
+
+        <!-- OTHER REASON TEXT -->
+        <div class="other-wrap" id="otherWrap" style="display:none;">
+          <input type="text" name="other_reason" placeholder="Describe the issue briefly…" id="otherInput">
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <a href="/dashboard" class="btn btn-secondary">← Back</a>
+        <button type="submit" class="btn btn-primary">Submit Complaint →</button>
+      </div>
+
+    </form>
+  </div>
 
 </div>
 
-<br>
-
-<!-- ACTION SELECTION -->
-
-<p><b>Notification Method</b></p>
-
-<div class="option-group">
-
-<label>
-<input type="checkbox" name="action" value="sms"> SMS
-</label>
-
-<label>
-<input type="checkbox" name="action" value="call"> Call
-</label>
-
-</div>
-
-<br>
-
-<button type="submit">Submit Complaint</button>
-
-</form>
-
-<br>
-
-<a href="/dashboard">
-<button>Back to Dashboard</button>
-</a>
-
-</div>
-
-
-<!-- JAVASCRIPT HERE -->
-
+<!-- JS -->
 <script>
+  // All bins toggle
+  const allBox  = document.getElementById('binAll');
+  const binBoxes = document.querySelectorAll('input[name="bins"]:not([value="All"])');
 
-const allBox = document.querySelector('input[value="All"]');
-const bins = document.querySelectorAll('input[name="bins"]:not([value="All"])');
+  allBox.addEventListener('change', () => {
+    binBoxes.forEach(b => b.checked = allBox.checked);
+  });
+  binBoxes.forEach(b => b.addEventListener('change', () => {
+    if (!b.checked) allBox.checked = false;
+    if ([...binBoxes].every(x => x.checked)) allBox.checked = true;
+  }));
 
-allBox.addEventListener("change", function(){
+  // Show "Other" input
+  const otherCb   = document.getElementById('rOther');
+  const otherWrap = document.getElementById('otherWrap');
+  const otherInput = document.getElementById('otherInput');
 
-    bins.forEach(function(bin){
-        bin.checked = allBox.checked;
-    });
-
-});
-
-bins.forEach(function(bin){
-
-    bin.addEventListener("change", function(){
-
-        if(!this.checked){
-            allBox.checked = false;
-        }
-
-    });
-
-});
-
+  otherCb.addEventListener('change', () => {
+    otherWrap.style.display = otherCb.checked ? 'block' : 'none';
+    if (otherCb.checked) otherInput.focus();
+    else otherInput.value = '';
+  });
 </script>
 
 </body>

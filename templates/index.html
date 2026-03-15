@@ -1,141 +1,194 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Smart Waste Monitoring</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Waste Monitoring — CUTM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
-
 <body>
 
-<header class="header">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <img src="{{ url_for('static', filename='cutm logo.png') }}" class="logo" alt="CUTM">
+      <div class="titles">
+        <h1>Centurion University</h1>
+        <h2>of Technology and Management</h2>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-pill"><span class="live-dot"></span> LIVE</div>
+      <a href="/logout" class="logout-btn">⏻ Logout</a>
+    </div>
+  </header>
 
-<img src="{{ url_for('static', filename='cutm logo.png') }}" class="logo">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">SMART WASTE MONITORING SYSTEM</div>
+    <h1 class="page-title">Campus Bin <span>Status</span></h1>
+    <p class="hero-sub">Live sensor data — updated every 2 seconds</p>
+  </section>
 
-<div class="titles">
-<h1>Centurion University Of Technology and Management</h1>
-</div>
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat-item">
+      <span class="stat-val" id="statBins">3</span>
+      <span class="stat-lbl">Active Bins</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <span class="stat-val" id="statAlerts">0</span>
+      <span class="stat-lbl">Alerts</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <span class="stat-val" id="lastUpdate">--:--</span>
+      <span class="stat-lbl">Last Sync</span>
+    </div>
+  </div>
 
-<div class="profile-menu">
-<div class="profile-icon">👤</div>
-<a href="/logout" class="logout-btn">Logout</a>
-</div>
+  <!-- BIN GRID -->
+  <main class="bins-grid">
 
-</header>
+    {% for n in [1,2,3] %}
+    <div class="bin-unit">
+      <div class="bin-label">BIN-0{{ n }}</div>
 
+      <div class="bin-wrap" id="binWrap{{ n }}">
+        <img src="{{ url_for('static', filename='Bin' ~ n ~ '.png') }}" class="bin-img" alt="Bin {{ n }}">
 
-<h1 class="title">Smart Waste Management Dashboard</h1>
+        <!-- HUD OVERLAY on the phone screen -->
+        <div class="bin-hud">
+          <div class="hud-row">
+            <div class="hud-val" id="hudWeight{{ n }}">—</div>
+            <div class="hud-unit">kg</div>
+            <div class="hud-lbl">WEIGHT</div>
+          </div>
+          <div class="hud-row">
+            <div class="hud-val" id="hudLevel{{ n }}">—</div>
+            <div class="hud-unit">cm</div>
+            <div class="hud-lbl">FILL LEVEL</div>
+          </div>
+          <div class="hud-status">
+            <div class="hud-status-dot" id="hudDot{{ n }}"></div>
+            <div class="hud-status-text" id="hudStatus{{ n }}">NOMINAL</div>
+          </div>
+        </div>
+      </div>
 
+      <!-- METRICS CARD -->
+      <div class="bin-metrics-card">
+        <div class="bmc-item">
+          <span class="bmc-val" id="weight{{ n }}">—</span>
+          <span class="bmc-unit">kg</span>
+          <span class="bmc-lbl">Weight</span>
+        </div>
+        <div class="bmc-sep"></div>
+        <div class="bmc-item">
+          <span class="bmc-val" id="level{{ n }}">—</span>
+          <span class="bmc-unit">cm</span>
+          <span class="bmc-lbl">Level</span>
+        </div>
+      </div>
 
-<div class="bins">
+      <!-- PROGRESS -->
+      <div class="bin-progress-wrap">
+        <div class="bin-progress-bar">
+          <div class="bin-progress-fill" id="prog{{ n }}" style="width:0%"></div>
+        </div>
+        <span class="prog-label" id="progLabel{{ n }}">0%</span>
+      </div>
 
-<!-- BIN 1 -->
-<div class="bin-container">
+      <!-- STATUS BADGE -->
+      <div class="bin-status-badge" id="badge{{ n }}">
+        <span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>
+        NOMINAL
+      </div>
 
-<img src="{{ url_for('static', filename='Bin1.png') }}" class="bin-img">
+    </div>
+    {% endfor %}
 
-<div class="bin-screen">
-<div class="screen-data">
+  </main>
 
-<b>BIN 1</b><br>
+  <!-- ACTION -->
+  <div class="action-row">
+    <a href="/complaint" class="complaint-btn">
+      <span>⚠</span> Register a Complaint <span class="btn-arrow">→</span>
+    </a>
+  </div>
 
-W: <span id="bin1">0</span> kg <br>
-L: <span id="level1">0</span> cm
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2025 Centurion University</span>
+    <span class="footer-sep">·</span>
+    <span>Smart Waste Monitoring System</span>
+    <span class="footer-sep">·</span>
+    <span>Dept. of ECE</span>
+  </footer>
 
-</div>
-</div>
+  <script>
+    const MAX_LEVEL = 100;
 
-</div>
+    function statusInfo(pct) {
+      if (pct >= 90) return { label: 'CRITICAL', color: '#f44336', hudColor: '#ff5252' };
+      if (pct >= 70) return { label: 'WARNING',  color: '#ff6d00', hudColor: '#ffab40' };
+      return          { label: 'NOMINAL',  color: '#00c853', hudColor: '#3dff9a' };
+    }
 
+    function updateBin(n, weight, level) {
+      const pct = Math.min(100, Math.round((level / MAX_LEVEL) * 100));
+      const { label, color, hudColor } = statusInfo(pct);
 
-<!-- BIN 2 -->
-<div class="bin-container">
+      // card metrics
+      document.getElementById(`weight${n}`).textContent = weight;
+      document.getElementById(`level${n}`).textContent  = level;
 
-<img src="{{ url_for('static', filename='Bin2.png') }}" class="bin-img">
+      // hud overlay
+      document.getElementById(`hudWeight${n}`).textContent = weight;
+      document.getElementById(`hudLevel${n}`).textContent  = level;
+      document.getElementById(`hudWeight${n}`).style.color = hudColor;
+      document.getElementById(`hudLevel${n}`).style.color  = hudColor;
+      document.getElementById(`hudWeight${n}`).style.textShadow = `0 0 12px ${hudColor}99`;
+      document.getElementById(`hudLevel${n}`).style.textShadow  = `0 0 12px ${hudColor}99`;
+      document.getElementById(`hudDot${n}`).style.background    = hudColor;
+      document.getElementById(`hudDot${n}`).style.boxShadow     = `0 0 8px ${hudColor}`;
+      document.getElementById(`hudStatus${n}`).textContent      = label;
+      document.getElementById(`hudStatus${n}`).style.color      = hudColor;
 
-<div class="bin-screen">
-<div class="screen-data">
+      // progress
+      document.getElementById(`prog${n}`).style.width = pct + '%';
+      document.getElementById(`prog${n}`).style.background =
+        `linear-gradient(90deg, ${color}88, ${color})`;
+      document.getElementById(`progLabel${n}`).textContent = pct + '%';
 
-<b>BIN 2</b><br>
+      // badge
+      const badge = document.getElementById(`badge${n}`);
+      badge.textContent = '';
+      const dot = document.createElement('span');
+      dot.style.cssText = `width:6px;height:6px;border-radius:50%;background:${color};display:inline-block;box-shadow:0 0 6px ${color}`;
+      badge.appendChild(dot);
+      badge.appendChild(document.createTextNode(' ' + label));
+      badge.style.color = color;
+      badge.style.borderColor = color + '55';
+      badge.style.background = color + '15';
+    }
 
-W: <span id="bin2">0</span> kg <br>
-L: <span id="level2">0</span> cm
+    setInterval(() => {
+      fetch('/data').then(r => r.json()).then(d => {
+        updateBin(1, d.bin1, d.level1);
+        updateBin(2, d.bin2, d.level2);
+        updateBin(3, d.bin3, d.level3);
 
-</div>
-</div>
-
-</div>
-
-
-<!-- BIN 3 -->
-<div class="bin-container">
-
-<img src="{{ url_for('static', filename='Bin3.png') }}" class="bin-img">
-
-<div class="bin-screen">
-<div class="screen-data">
-
-<b>BIN 3</b><br>
-
-W: <span id="bin3">0</span> kg <br>
-L: <span id="level3">0</span> cm
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- REGISTER BUTTON -->
-
-<div style="margin-top:40px">
-
-<a href="/complaint">
-
-<button style="width:250px;font-size:18px">
-
-Register Complaint
-
-</button>
-
-</a>
-
-</div>
-
-
-<footer class="footer">
-<p>© 2025 Centurion University | Smart Waste Monitoring System</p>
-</footer>
-
-
-<script>
-
-setInterval(function(){
-
-fetch("/data")
-.then(res => res.json())
-.then(data => {
-
-document.getElementById("bin1").innerHTML = data.bin1
-document.getElementById("bin2").innerHTML = data.bin2
-document.getElementById("bin3").innerHTML = data.bin3
-
-document.getElementById("level1").innerHTML = data.level1
-document.getElementById("level2").innerHTML = data.level2
-document.getElementById("level3").innerHTML = data.level3
-
-})
-
-},2000)
-
-</script>
-
+        const alerts = [d.level1, d.level2, d.level3].filter(l => (l/MAX_LEVEL) >= 0.9).length;
+        document.getElementById('statAlerts').textContent = alerts;
+        document.getElementById('lastUpdate').textContent =
+          new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+      });
+    }, 2000);
+  </script>
 </body>
 </html>

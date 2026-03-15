@@ -1,39 +1,124 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<title>Smart Waste Management</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Waste Management — CUTM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
+<body class="auth-page">
 
-<body>
+  <!-- FLOATING BG SHAPES -->
+  <div class="auth-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
-<h1 class="title">Smart Waste Management System</h1>
+  <!-- TOP BAR -->
+  <header class="auth-topbar">
+    <div class="auth-brand">
+      <div class="brand-icon">♻</div>
+      <div>
+        <div class="brand-name">Smart Waste Management</div>
+        <div class="brand-sub">Centurion University of Technology & Management</div>
+      </div>
+    </div>
+    <div class="live-pill">
+      <span class="live-dot"></span> LIVE SYSTEM
+    </div>
+  </header>
 
-<div class="auth-container">
+  <!-- HERO SPLIT -->
+  <main class="welcome-main">
 
-<h2>Welcome</h2>
+    <!-- LEFT: INFO -->
+    <div class="welcome-info">
 
-<a href="/login">
-<button>Login</button>
-</a>
+      <div class="welcome-eyebrow">IoT-Powered Campus Solution</div>
 
-<br><br>
+      <h1 class="welcome-title">
+        Smart Waste<br>
+        <span class="welcome-accent">Monitoring</span><br>
+        System
+      </h1>
 
-<a href="/complaint">
-<button>Register Complaint</button>
-</a>
+      <p class="welcome-desc">
+        Real-time bin telemetry, complaint management, and intelligent alerts —
+        all in one platform for Centurion University campus.
+      </p>
 
-</div>
+      <div class="welcome-features">
+        <div class="feature-item">
+          <span class="feature-icon">📡</span>
+          <span>Live sensor data every 2 seconds</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔔</span>
+          <span>SMS &amp; call alert notifications</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <span>Weight &amp; fill level monitoring</span>
+        </div>
+      </div>
 
-<footer class="footer">
-<p>© 2025 Centurion University | Smart Waste Monitoring</p>
-</footer>
+      <div class="welcome-stats">
+        <div class="ws-item">
+          <span class="ws-val">3</span>
+          <span class="ws-lbl">Smart Bins</span>
+        </div>
+        <div class="ws-sep"></div>
+        <div class="ws-item">
+          <span class="ws-val">24/7</span>
+          <span class="ws-lbl">Monitoring</span>
+        </div>
+        <div class="ws-sep"></div>
+        <div class="ws-item">
+          <span class="ws-val">ECE</span>
+          <span class="ws-lbl">Dept. CUTM</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: ACTION CARD -->
+    <div class="welcome-card-wrap">
+      <div class="auth-card welcome-card">
+
+        <div class="auth-card-icon">🗑️</div>
+        <h2 class="auth-card-title">Welcome Back</h2>
+        <p class="auth-card-sub">Access the campus waste monitoring portal</p>
+
+        <div class="welcome-actions">
+          <a href="/login" class="btn btn-primary">
+            <span>🔑</span> Login to Portal
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="/complaint" class="btn btn-secondary">
+            <span>⚠</span> Register a Complaint
+          </a>
+        </div>
+
+        <div class="auth-divider">
+          <span>New here?</span>
+        </div>
+
+        <a href="/register" class="auth-link-btn">Create an Account →</a>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="auth-footer">
+    <span>© 2025 Centurion University</span>
+    <span class="footer-sep">·</span>
+    <span>Smart Waste Monitoring System</span>
+    <span class="footer-sep">·</span>
+    <span>Dept. of ECE</span>
+  </footer>
 
 </body>
-
 </html>
